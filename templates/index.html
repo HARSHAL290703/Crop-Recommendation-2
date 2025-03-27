@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .input-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            outline: none;
+            padding: 14px;
+            border-radius: 25px;
+            font-size: 16px;
+            width: 160px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus {
+            box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.5);
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #dd2476, #ff512f);
+        }
+
+        .prediction {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .error {
+            color: #ffcccb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">🌱 Smart Crop Predictor 🌾</div>
+    <div class="description">
+        Enter the soil and climate details below, and we’ll recommend the best crop for you.
+    </div>
+
+    <form action="/predict" method="post" class="input-area">
+        <input type="number" step="any" name="N" placeholder="Nitrogen (N)" required>
+        <input type="number" step="any" name="P" placeholder="Phosphorus (P)" required>
+        <input type="number" step="any" name="K" placeholder="Potassium (K)" required>
+        <input type="number" step="any" name="temperature" placeholder="Temperature (°C)" required>
+        <input type="number" step="any" name="humidity" placeholder="Humidity (%)" required>
+        <input type="number" step="any" name="ph" placeholder="pH Level" required>
+        <input type="number" step="any" name="rainfall" placeholder="Rainfall (mm)" required>
+        
+        <button type="submit" class="submit-btn">🌾 Predict Crop</button>
+    </form>
+
+    <div class="prediction {{ 'error' if 'Error' in prediction_text else '' }}">
+        {{ prediction_text }}
+    </div>
+
+</body>
+</html>
